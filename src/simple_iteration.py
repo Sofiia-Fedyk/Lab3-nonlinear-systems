@@ -16,11 +16,20 @@ def simple_iteration(x0=X0, eps=EPS, q=None):
     history = [(0, x, y, None, None, None)]
 
     for k in range(1, MAX_ITER + 1):
-        raise NotImplementedError
+        x_new = phi1(x, y)
+        y_new = phi2(x, y)          # обидва від старих x, y
+
+        dx, dy = abs(x_new - x), abs(y_new - y)
+        delta = max(dx, dy)
+        x, y = x_new, y_new
+        history.append((k, x, y, dx, dy, delta))
+
+        if delta <= stop_threshold(q, eps):
+            return make_result("МПІ", history)
 
     raise RuntimeError("МПІ не зійшовся")
 
 
 if __name__ == "__main__":
-    r = simple_iteration()
+    r = simple_iteration(q=0.577)
     print(r["x"], r["y"], r["iters"])
