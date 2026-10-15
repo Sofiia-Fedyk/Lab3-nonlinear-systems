@@ -2,8 +2,13 @@
 Графічна локалізація кореня і контроль через scipy.Вільгельм.
 """
 import os
-import numpy as np
+import matplotlib
+
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.lines import Line2D
+from matplotlib.patches import Rectangle
 from scipy.optimize import fsolve
 
 from common import F, G, X0
