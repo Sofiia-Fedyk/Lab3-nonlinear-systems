@@ -36,7 +36,7 @@ def main():
 
     for r in results:
         table = history_table(r)
-        print(f"--- {r['method']} ---")
+        print(f" {r['method']} ")
         print(table.to_string(index=False), "\n")
         table.to_csv(os.path.join(RESULTS_DIR, FILE_NAMES[r["method"]] + ".csv"),
                      index=False)
@@ -49,12 +49,12 @@ def main():
         "|f1(x*)|": abs(F(r["x"], r["y"])[0]),
         "|f2(x*)|": abs(F(r["x"], r["y"])[1]),
     } for r in results])
-    print("--- Порівняння методів ---")
+    print(" Порівняння методів ")
     print(summary.to_string(index=False), "\n")
     summary.to_csv(os.path.join(RESULTS_DIR, "summary.csv"), index=False)
 
     xs, ys = fsolve_check()
-    print(f"scipy.optimize.fsolve: x = {xs:.5f}, y = {ys:.5f}")
+    print(f"x = {xs:.5f}, y = {ys:.5f}")
     print(f"Відповідь: x* ≈ {results[0]['x']:.3f}, y* ≈ {results[0]['y']:.3f}")
 
 
