@@ -13,11 +13,29 @@ def newton(x0=X0, eps=EPS):
     history = [(0, x, y, None, None, None)]
 
     for k in range(1, MAX_ITER + 1):
-        raise NotImplementedError
+        f1, f2 = F(x, y)
+        (a, b), (c, d) = W(x, y)
 
-    raise RuntimeError("Метод Ньютона не зійшовся")
+        # W·[dx, dy] = -F, розв'язок за Крамером
+        det = a * d - b * c
+        if det == 0:
+            raise RuntimeError("Матриця Якобі вироджена, метод Ньютона не може продовжити")
+        dx = (-f1 * d - b * (-f2)) / det
+        dy = (a * (-f2) - (-f1) * c) / det
+
+        x += dx
+        y += dy
+        delta = max(abs(dx), abs(dy))
+        history.append((k, float(x), float(y), float(abs(dx)), float(abs(dy)), float(delta)))
+
+        if delta <= eps:
+            return make_result("Ньютон", history)
+
+    raise RuntimeError(f"Метод Ньютона не зійшовся за {MAX_ITER} ітерацій")
 
 
 if __name__ == "__main__":
-    r = newton()
-    print(r["x"], r["y"], r["iters"])
+    res = newton()
+    print(res["method"], res["x"], res["y"], res["iters"])
+    for row in res["history"]:
+        print(row)
