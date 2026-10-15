@@ -35,5 +35,7 @@ def newton(x0=X0, eps=EPS):
 
 
 if __name__ == "__main__":
-    r = newton()
-    print(r["x"], r["y"], r["iters"])
+    res = newton()
+    print(res["method"], res["x"], res["y"], res["iters"])
+    for row in res["history"]:
+        print(row)
