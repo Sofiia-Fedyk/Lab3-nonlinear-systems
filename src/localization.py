@@ -12,6 +12,11 @@ from matplotlib.patches import Rectangle
 from scipy.optimize import fsolve
 
 from common import F, G, X0
+from common import X0, G, F
+
+DEFAULT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "localization.png")
+
+
 
 SRC_DIR = os.path.dirname(os.path.abspath(__file__))
 
