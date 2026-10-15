@@ -13,7 +13,15 @@ def newton(x0=X0, eps=EPS):
     history = [(0, x, y, None, None, None)]
 
     for k in range(1, MAX_ITER + 1):
-        raise NotImplementedError
+        f1, f2 = F(x, y)
+        (a, b), (c, d) = W(x, y)
+
+        # W·[dx, dy] = -F, розв'язок за Крамером
+        det = a * d - b * c
+        if det == 0:
+            raise RuntimeError("Матриця Якобі вироджена, метод Ньютона не може продовжити")
+        dx = (-f1 * d - b * (-f2)) / det
+        dy = (a * (-f2) - (-f1) * c) / det
 
     raise RuntimeError("Метод Ньютона не зійшовся")
 
