@@ -23,7 +23,15 @@ def newton(x0=X0, eps=EPS):
         dx = (-f1 * d - b * (-f2)) / det
         dy = (a * (-f2) - (-f1) * c) / det
 
-    raise RuntimeError("Метод Ньютона не зійшовся")
+        x += dx
+        y += dy
+        delta = max(abs(dx), abs(dy))
+        history.append((k, float(x), float(y), float(abs(dx)), float(abs(dy)), float(delta)))
+
+        if delta <= eps:
+            return make_result("Ньютон", history)
+
+    raise RuntimeError(f"Метод Ньютона не зійшовся за {MAX_ITER} ітерацій")
 
 
 if __name__ == "__main__":
